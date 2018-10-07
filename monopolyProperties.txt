@@ -1,1 +1,3 @@
-Number_of_Rounds=5
+Number_of_Rounds=50
+Number_of_Players=4
+Simulate_type=0

@@ -29,7 +29,7 @@ public class MonopolyGame {
 	 * initialize the system with number of Players
 	 * @param numOfPlayers number of Players
 	 */
-	public MonopolyGame(int numOfPlayers, int numOfRounds){
+	public MonopolyGame(int numOfPlayers, int numOfRounds, int simulateType){
 		Cup.initialize(NUM_OF_DICE);
 		players = new ArrayList<Player>(numOfPlayers);
 		ROUNDS_TOTAL = numOfRounds;
@@ -64,14 +64,17 @@ public class MonopolyGame {
 		Properties monopolyProperties = new Properties();
 		// Defaults
 		monopolyProperties.setProperty("Number_of_Players", "2");
-		monopolyProperties.setProperty("Number_of_Rounds", "20");
+        monopolyProperties.setProperty("Number_of_Rounds", "20");
+        monopolyProperties.setProperty("Simulate_type", "1");
 
 		FileReader inStream = null;
 		
 		try {
-			inStream = new FileReader("monopolyProperties.txt");
+			inStream = new FileReader("/Users/hannah/Downloads/Monopoly_It4/monopolyProperties.txt");
 			monopolyProperties.load(inStream);
-		} finally {
+		} catch (Exception e){
+            e.printStackTrace();
+		}finally {
 			 if (inStream != null) {
 	                inStream.close();
 	            }
@@ -82,7 +85,9 @@ public class MonopolyGame {
 			System.exit(1);
 		}
 		int numberOfRounds = Integer.parseInt(monopolyProperties.getProperty("Number_of_Rounds"));
-		MonopolyGame game = new MonopolyGame(numberOfPlayers, numberOfRounds);
+        int simulatorType = Integer.parseInt(monopolyProperties.getProperty("Simulate_type"));
+
+        MonopolyGame game = new MonopolyGame(numberOfPlayers, numberOfRounds,simulatorType);
 		game.playGame();
 	}
 }
