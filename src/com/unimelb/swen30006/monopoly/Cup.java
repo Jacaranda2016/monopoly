@@ -28,10 +28,12 @@ public class Cup {
 	
 	private static FileWriter outStream = null;
 	
-	public static void initialize(int numOfDice) {
+	public static void initialize(int numOfDice, int simulateType) {
+
 		dice = new ArrayList<Die>(numOfDice);
 		for (int i = 0; i < numOfDice; i++ ){
-			dice.add(new Die());
+			RollType rollType = RollType.fromValue(simulateType);
+			dice.add(new Die(rollType));
 		}
 		try {
 			outStream = new FileWriter("monopolyRollsOut.txt");
